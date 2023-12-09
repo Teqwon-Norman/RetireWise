@@ -17,9 +17,9 @@ class SignUp(Resource):
         """ Create a new user """
         data = request.get_json()
 
-        first_name = data.get('firstname')
-        last_name = data.get('lastname')
+        username = data.get('nickname')
         email = data.get('email')
+        email_verified = data.get('email_verified')
 
         user = mongo.db.users
         user_exists = mongo.db.users.find_one({'email' : email})
@@ -29,16 +29,10 @@ class SignUp(Resource):
         user.insert_one(
             {
                 "user_id": str(uuid.uuid4()),
-                "first_name": first_name,
-                "last_name": last_name,
+                "username": username,
                 "email": email,
+                "email_verfied": email_verified,
             }
         )
 
-        return jsonify(
-            {
-                "first_name": first_name,
-                "last_name": last_name,
-                "email": email,
-            }
-        )
+        return jsonify({'message' : f'User with email {email} created successfully!!'})
