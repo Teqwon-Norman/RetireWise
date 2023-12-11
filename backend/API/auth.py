@@ -7,7 +7,7 @@ import uuid
 auth_ns = Namespace('auth', description='A namespace for our authentication')
 
 @auth_ns.route('/register')
-class SignUp(Resource):
+class Register(Resource):
     def get(self):
         """ Get all users """
         users = mongo.db.users.find()

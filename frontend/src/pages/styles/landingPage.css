@@ -1,0 +1,7 @@
+.landing-page {
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(20, 19, 19);
+    display: flex;
+    justify-content: center;
+}
