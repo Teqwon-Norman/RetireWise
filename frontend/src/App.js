@@ -8,7 +8,7 @@ import {
   RouterProvider 
 } from 'react-router-dom';
 
-import Profile from './pages/profile';
+import Profile from './pages/retirementAccountLog';
 import LandingPage from './pages/landingPage';
 import RetirementAccountLog from './pages/retirementAccountLog';
 import StockSelection from './pages/stockSelection';
