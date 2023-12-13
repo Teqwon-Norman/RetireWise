@@ -3,23 +3,25 @@ from flask import request, jsonify
 from exts import mongo
 
 import uuid
+import jwt
 
 auth_ns = Namespace('auth', description='A namespace for our authentication')
 
-@auth_ns.route('/register')
-class Register(Resource):
+@auth_ns.route('/login')
+class Login(Resource):
     def get(self):
         """ Get all users """
         users = mongo.db.users.find()
         return jsonify(users)
 
     def post(self):
-        """ Create a new user """
+        """ update database if user doesn't exist """
         data = request.get_json()
 
-        username = data.get('nickname')
-        email = data.get('email')
-        email_verified = data.get('email_verified')
+        email = data['email']
+        first_name = data['first_name']
+        last_name = data['last_name']
+        email_verified = data['email_verified']
 
         user = mongo.db.users
         user_exists = mongo.db.users.find_one({'email' : email})
@@ -29,9 +31,10 @@ class Register(Resource):
         user.insert_one(
             {
                 "user_id": str(uuid.uuid4()),
-                "username": username,
+                "first_name": first_name,
+                "last_name": last_name,
                 "email": email,
-                "email_verfied": email_verified,
+                "email_verfied": email_verified
             }
         )
 
