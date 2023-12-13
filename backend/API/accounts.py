@@ -3,7 +3,7 @@ from flask import request, jsonify, session
 from exts import mongo
 from bson.json_util import dumps
 
-accounts_ns = Namespace('retirement', description='A namespace for our authentication')
+accounts_ns = Namespace('retirement', description='A namespace for getting all retirement accounts for a user')
 
 @accounts_ns.route('/accounts/<string:user_id>')
 class Account(Resource):

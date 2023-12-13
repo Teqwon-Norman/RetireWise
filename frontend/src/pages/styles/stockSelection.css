@@ -1,0 +1,63 @@
+.stock-selection-page {
+    text-align: center;
+    background-color: gray;
+    height: 100vh;
+}
+
+.search-box {
+    margin-top: 5%;
+    width: 20%;
+}
+
+.ant-input::placeholder {
+   color: rgb(77, 73, 73);
+}
+
+.ticker-display {
+    border: 1px solid #ccc;
+    text-align: center;
+    width: 20%;
+    background-color: #f8f8f8;
+}
+
+.selection-page-title {
+    padding-top: 5%;
+    font-weight: bold;
+    font-size: 45px;
+    margin-right: 5%;
+}
+
+.add-ticker-button {
+    margin-left: 2%;
+}
+
+.ticker-selection {
+    display: flex;
+    text-align: center;
+    border: 3px solid rgb(255, 255, 255);
+    margin-top: 10%;
+    justify-content: space-around;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.selected-tickers {
+    margin-left: 36.5%;
+    margin-right: 44%;
+    text-align: center;
+}
+
+.ticker-text {
+    font-weight: 300;
+}
+
+.ticker-text-container {
+    width: 50px;
+}
+
+.simulate-retirement-button {
+    margin-top: 2%;
+    margin-right: 7.5%;
+    width: 20%;
+}
+

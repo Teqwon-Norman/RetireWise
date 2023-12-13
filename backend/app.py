@@ -4,7 +4,7 @@ from flask_restx import Api
 from flask_cors import CORS
 
 from exts import mongo
-from API import auth, accounts
+from API import auth, accounts, tickers
 
 
 def create_app(config):
@@ -19,5 +19,6 @@ def create_app(config):
     # /auth will always be before any endpoint we create
     api.add_namespace(auth.auth_ns)
     api.add_namespace(accounts.accounts_ns)
+    api.add_namespace(tickers.tickers_ns)
 
     return app
