@@ -8,6 +8,7 @@ import {
   RouterProvider 
 } from 'react-router-dom';
 
+import Profile from './pages/profile';
 import LandingPage from './pages/landingPage';
 import RetirementAccountLog from './pages/retirementAccountLog';
 import StockSelection from './pages/stockSelection';
@@ -20,9 +21,10 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path='/' index  element={<LandingPage/>} />
-      <Route path='/retirement-accounts' element={<RetirementAccountLog />} />
+      <Route path='retirement-accounts' element={<RetirementAccountLog />} />
       <Route path='stock-selection' element={<StockSelection />} exact/>
       <Route path='retirement-simulator' element={<RetirementSimulation />} exact/>
+      <Route path='profile' element={<Profile />} exact/>
       <Route path="*" element={<ErrorPage />} />
     </Route>
   )
