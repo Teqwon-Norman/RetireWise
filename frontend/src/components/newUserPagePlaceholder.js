@@ -18,7 +18,9 @@ export default function PlaceHolder() {
         <div className="posts-container">
           <div className="circle"></div>
           <div className="red-line"></div>
-          <h1 className="placeholder-text">Try Creating A New Retirement Account 📈</h1>
+          <h1 className="placeholder-text">
+            Try Creating A New Retirement Account 📈
+          </h1>
         </div>
         <div className="posts-container">
           <div className="circle"></div>

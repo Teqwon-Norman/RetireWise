@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
-import { Input, Button, message } from "antd";
+import { Input, Button, message, ConfigProvider } from "antd";
 import Ticker from "../components/tickerComponent";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -47,7 +47,8 @@ export default function StockSelection() {
       <div className="stock-selection-page">
         <div className="selection-container">
           <h1 className="selection-page-title">
-            Add stocks to your retirement account
+            Add Stocks To Your <br />
+            Retirement Account
           </h1>
           <Input
             size="large"
@@ -58,7 +59,7 @@ export default function StockSelection() {
             onChange={(e) => setTickerInput(e.target.value)}
           />
           <Button
-            // type="primary"
+            type="primary"
             size={size}
             className="add-ticker-button"
             onClick={addTicker}
@@ -71,18 +72,30 @@ export default function StockSelection() {
             <Ticker key={index} name={ticker} clickHandler={deleteTicker} />
           ))}
         </div>
-        <Button
-          // type="primary"
-          size={size}
-          className="simulate-retirement-button"
-          onClick={() =>
-            navigate("/retirement-simulator", {
-              state: { tickers: selectedTickers },
-            })
-          }
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#0000ff",
+            },
+          }}
         >
-          Simulate Retirement
-        </Button>
+          <Button
+            type="primary"
+            size={size}
+            className="simulate-retirement-button"
+            style={{
+              background: "#2450d6",
+              color: "white",
+            }}
+            onClick={() =>
+              navigate("/retirement-simulator", {
+                state: { tickers: selectedTickers },
+              })
+            }
+          >
+            Simulate Retirement
+          </Button>
+        </ConfigProvider>
       </div>
     </>
   );

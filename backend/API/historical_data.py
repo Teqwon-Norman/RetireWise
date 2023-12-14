@@ -34,17 +34,75 @@ class HistoricalData(Resource):
         }
 
         response = requests.get(url, headers=headers, timeout=10)
-        d = response.json()
+        data = response.json()
 
-        access = d["bars"]
-        shares_per_ticker = [10000 / d["bars"][k][0]["o"] for k in access]
+        access = data["bars"]
 
-        m = 50000
-        data_to_send = []
+        # return make_response(jsonify(access))
+        
+        shares_per_ticker = [10000 / data["bars"][k][0]["o"] for k in access]
+
+        result_data = {}
 
         for i, tick in enumerate(access):
+            m = 50000
             for _, t in enumerate(access[tick]):
                 m += (t["c"] - t["o"]) * shares_per_ticker[i]
                 dt_object = datetime.strptime(t["t"], "%Y-%m-%dT%H:%M:%SZ")
-                data_to_send.append({"value": m, "time": int(dt_object.timestamp())})
-        return make_response(jsonify({"chart_data": data_to_send, "balance": m}), 200)
+
+                if tick in result_data:
+                    result_data[tick].append({"value": m, "time": int(dt_object.timestamp())})
+                else:
+                    result_data[tick] = [{"value": m, "time": int(dt_object.timestamp())}]
+
+        t1, t2, t3, t4, t5 = [], [], [], [], []
+        var = [t1, t2, t3, t4, t5]
+        t1Key, t2Key, t3Key, t4Key, t5Key = "", "", "", "", ""
+        varKeys = [t1Key, t2Key, t3Key, t4Key, t5Key]
+
+        # m = 50 000
+
+        # profit = 119 - 11
+
+        # 50 119 - 50 000 = 119
+
+        # 49 989 - 50 000 = -11
+
+        # for k, v in result_data.items():
+        #     print(k, v)
+
+        #     break
+
+        money = 0
+        m1, m2, m3, m4, m5 = 50000, 50000, 50000, 50000, 50000
+
+        result = []
+
+        for i, (k, v) in enumerate(result_data.items()):
+            var[i].append({k: v})
+            varKeys[i] = k
+
+        for a, b, c, d, e in zip(t1[0][varKeys[0]], t2[0][varKeys[1]], t3[0][varKeys[2]], t4[0][varKeys[3]], t5[0][varKeys[4]]):
+            print(a["value"] - money, b["value"] - money, c["value"] - money, d["value"] - money, e["value"] - money)
+            print("\n")
+
+            profitA = (a["value"] - m1)
+            profitB = (b["value"] - m2)
+            profitC = (c["value"] - m3)
+            profitD = (d["value"] - m4)
+            profitE = (e["value"] - m5)
+
+            m1 += profitA
+            m2 += profitB
+            m3 += profitC
+            m4 += profitD
+            m5 += profitE
+
+            total_profit = profitA + profitB + profitC + profitD + profitE
+
+            result.append({"value": money + total_profit, "time": a["time"]})
+
+            money += total_profit
+
+        return make_response(jsonify({"chart_data": result, "balance": money}))
+        # return make_response(jsonify({"chart_data": data_to_send, "balance": m}), 200)

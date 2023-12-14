@@ -51,7 +51,7 @@ const RetirementAccountLog = () => {
       authenticateUser();
       getPosts();
     }
-  });
+  }, [isAuthenticated, posts]);
 
   return (
     <>
@@ -65,7 +65,10 @@ const RetirementAccountLog = () => {
               <h1 className="icon-label">Filter</h1>
             </div>
             <div className="create-container">
-              <FileAddOutlined onClick={() => navigate("/stock-selection")} className="create-icon" />
+              <FileAddOutlined
+                onClick={() => navigate("/stock-selection")}
+                className="create-icon"
+              />
               <h1 className="icon-label">Create</h1>
             </div>
           </div>

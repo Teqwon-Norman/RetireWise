@@ -11,24 +11,23 @@ const ChartComponent = ({ containerID, tickers }) => {
   useEffect(() => {
     const getHistoricalStockData = async () => {
       const response = await axios.post(
-        `http://127.0.0.1:5000/historical_data/tickers`, {
-          data: tickers
+        `http://127.0.0.1:5000/historical_data/tickers`,
+        {
+          data: tickers,
         }
       );
 
       if (response.status === 200) {
         setChartData(response.data.chart_data);
         setAccountBalance(response.data.balance);
-
       }
     };
 
     if (chartData.length === 0) {
       getHistoricalStockData();
-    } 
+    }
 
     const parentDivWidth = chartContainerRef.current.parentElement.clientWidth;
-    // const chartOptions = { layout: { background: { type: "solid", color: 'transparent' } } };
 
     chart.current = createChart(chartContainerRef.current, {
       width: parentDivWidth * 0.5,
@@ -41,6 +40,8 @@ const ChartComponent = ({ containerID, tickers }) => {
 
     lineSeries.setData(chartData);
 
+    chartData.sort((a, b) => b.time - a.time);
+
     chart.current.timeScale().fitContent();
 
     // Cleanup when the component unmounts
@@ -49,9 +50,9 @@ const ChartComponent = ({ containerID, tickers }) => {
         chart.current.remove();
       }
     };
-  }, [containerID]);
+  }, [chartData]);
 
-  return <div ref={chartContainerRef} />;
+  return <div className="rounded-lg" ref={chartContainerRef} />;
 };
 
 export default ChartComponent;

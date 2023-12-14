@@ -1,78 +1,78 @@
 .retirement-account-page {
-    background-color: rgb(200, 200, 200);
+  background-color: rgb(200, 200, 200);
 }
 
 .settings-icon {
-    font-size: 75px;
+  font-size: 75px;
 }
 
 .create-icon {
-    font-size: 75px;
+  font-size: 75px;
 }
 
 .buttons-container {
-    display: flex;
-    justify-content: space-between;
-    background-color: rgb(233, 227, 210);
-    width: 50%;
-    margin-left: 25%;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 2%;
-    padding-bottom: 1%;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(233, 227, 210);
+  width: 50%;
+  margin-left: 25%;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 2%;
+  padding-bottom: 1%;
 }
 
 .posts-container {
-    width: 50%;
-    min-height: 100px;
-    overflow: hidden;
-    background-color: rgb(233, 227, 210);
-    margin-left: 25%;
-    border-top: 4px solid rgb(16, 183, 229);
-    border-bottom: 1px solid rgb(16, 183, 229);
-    display: flex;
+  width: 50%;
+  min-height: 100px;
+  overflow: hidden;
+  background-color: rgb(233, 227, 210);
+  margin-left: 25%;
+  border-top: 4px solid rgb(16, 183, 229);
+  border-bottom: 1px solid rgb(16, 183, 229);
+  display: flex;
 }
 
 .red-line {
-    background-color: rgb(183, 69, 69);
-    width: 5px;
-    min-height: 10.5vh;
-    overflow: hidden;
-    margin-left: 3%;
+  background-color: rgb(183, 69, 69);
+  width: 5px;
+  min-height: 10.5vh;
+  overflow: hidden;
+  margin-left: 3%;
 }
 
 .circle {
-    background-color: rgb(204, 199, 199);
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    margin-top: 35px;
-    margin-left: 25px;
+  background-color: rgb(204, 199, 199);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: 35px;
+  margin-left: 25px;
 }
 
 .setting-container {
-    text-align: center;
+  text-align: center;
 }
 
 .create-container {
-    text-align: center;
+  text-align: center;
 }
 
 .icon-label {
-    padding-top: 5%;
-    font-weight: bold;
-    letter-spacing: 1.5px;
-    font-size: 25px;
+  padding-top: 5%;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  font-size: 25px;
 }
 
 .placeholder-text {
-    font-weight: bold;
-    padding-left: 10%;
-    padding-top: 3%;
+  font-weight: bold;
+  padding-left: 10%;
+  padding-top: 3%;
 }
 
 .account-information {
-    font-weight: bold;
-    padding-left: 10%;
-    padding-top: 3%;
+  font-weight: bold;
+  padding-left: 10%;
+  padding-top: 3%;
 }

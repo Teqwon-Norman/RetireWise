@@ -11,9 +11,8 @@ export default function RetirementSimulation() {
 
   console.log(stateData);
 
-
   return (
-    <div className="w-full h-full py-12 px-36">
+    <div className="w-screen h-screen py-12 px-36 bg-[#C8C8C8]">
       <h1 className="text-center text- text-2xl font-bold mb-14">
         Retirement Simulation
       </h1>
