@@ -59,7 +59,7 @@ export default function StockSelection() {
             onChange={(e) => setTickerInput(e.target.value)}
           />
           <Button
-            type="primary"
+            // type="primary"
             size={size}
             className="add-ticker-button"
             onClick={addTicker}
@@ -73,7 +73,7 @@ export default function StockSelection() {
           ))}
         </div>
         <Button
-            type="primary"
+            // type="primary"
             size={size}
             className="simulate-retirement-button"
             onClick={() => navigate('/retirement-simulator')}

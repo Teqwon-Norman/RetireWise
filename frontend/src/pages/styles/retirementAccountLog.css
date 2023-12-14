@@ -59,8 +59,10 @@
 }
 
 .icon-label {
+    padding-top: 5%;
     font-weight: bold;
     letter-spacing: 1.5px;
+    font-size: 25px;
 }
 
 .placeholder-text {

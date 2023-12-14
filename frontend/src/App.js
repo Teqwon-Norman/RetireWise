@@ -28,9 +28,7 @@ const router = createBrowserRouter(
   )
 );
 
-function App() {
-  const { loginWithRedirect } = useAuth0();
-  
+function App() {  
   return (
     <RouterProvider router={router} />
   );
