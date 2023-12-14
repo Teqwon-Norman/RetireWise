@@ -1,5 +1,5 @@
 from flask_restx import Namespace, Resource, fields
-from flask import request, jsonify, make_response
+from flask import request, jsonify
 from exts import mongo
 
 import uuid
@@ -16,8 +16,6 @@ class Login(Resource):
     def post(self):
         """ update database if user doesn't exist """
         data = request.get_json()
-
-        print(data)
 
         email = data['email']
         first_name = data['first_name']

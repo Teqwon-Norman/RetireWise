@@ -4,7 +4,7 @@ from flask_restx import Api
 from flask_cors import CORS
 
 from exts import mongo
-from API import auth, accounts, tickers
+from API import auth, accounts, tickers, historical_data
 
 
 def create_app(config):
@@ -20,5 +20,6 @@ def create_app(config):
     api.add_namespace(auth.auth_ns)
     api.add_namespace(accounts.accounts_ns)
     api.add_namespace(tickers.tickers_ns)
+    api.add_namespace(historical_data.historical_data_ns)
 
     return app
