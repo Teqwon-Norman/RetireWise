@@ -12,21 +12,17 @@ historical_data_ns = Namespace(
     "historical_data", description="A namespace for our historical stock data"
 )
 
-
 @historical_data_ns.route("/tickers")
 class HistoricalData(Resource):
     def post(self):
         """Get historical data for a ticker"""
         data = request.get_json()
-
         tickers = data["data"]
         symbols_url_encoded = ",".join(map(urllib.parse.quote, tickers))
-
         today = date.today()
         today_five_years_ago = today - timedelta(days=5 * 365)
 
         url = f"https://data.alpaca.markets/v2/stocks/bars?symbols={symbols_url_encoded}&timeframe=1D&start={today_five_years_ago}&end={today}&limit=5000&adjustment=split&feed=iex&sort=asc"
-
         headers = {
             "accept": "application/json",
             "APCA-API-KEY-ID": Config.APCA_API_KEY_ID,
@@ -35,13 +31,8 @@ class HistoricalData(Resource):
 
         response = requests.get(url, headers=headers, timeout=10)
         data = response.json()
-
         access = data["bars"]
-
-        # return make_response(jsonify(access))
-        
         shares_per_ticker = [10000 / data["bars"][k][0]["o"] for k in access]
-
         result_data = {}
 
         for i, tick in enumerate(access):
@@ -59,23 +50,9 @@ class HistoricalData(Resource):
         var = [t1, t2, t3, t4, t5]
         t1Key, t2Key, t3Key, t4Key, t5Key = "", "", "", "", ""
         varKeys = [t1Key, t2Key, t3Key, t4Key, t5Key]
-
-        # m = 50 000
-
-        # profit = 119 - 11
-
-        # 50 119 - 50 000 = 119
-
-        # 49 989 - 50 000 = -11
-
-        # for k, v in result_data.items():
-        #     print(k, v)
-
-        #     break
-
-        money = 0
+        end_profit = 0
+        money = 50000
         m1, m2, m3, m4, m5 = 50000, 50000, 50000, 50000, 50000
-
         result = []
 
         for i, (k, v) in enumerate(result_data.items()):
@@ -83,9 +60,6 @@ class HistoricalData(Resource):
             varKeys[i] = k
 
         for a, b, c, d, e in zip(t1[0][varKeys[0]], t2[0][varKeys[1]], t3[0][varKeys[2]], t4[0][varKeys[3]], t5[0][varKeys[4]]):
-            print(a["value"] - money, b["value"] - money, c["value"] - money, d["value"] - money, e["value"] - money)
-            print("\n")
-
             profitA = (a["value"] - m1)
             profitB = (b["value"] - m2)
             profitC = (c["value"] - m3)
@@ -99,10 +73,7 @@ class HistoricalData(Resource):
             m5 += profitE
 
             total_profit = profitA + profitB + profitC + profitD + profitE
-
             result.append({"value": money + total_profit, "time": a["time"]})
-
+            end_profit += total_profit
             money += total_profit
-
-        return make_response(jsonify({"chart_data": result, "balance": money}))
-        # return make_response(jsonify({"chart_data": data_to_send, "balance": m}), 200)
+        return make_response(jsonify({"chart_data": result, "balance": money, "total_profit": end_profit}))

@@ -75,4 +75,10 @@
   font-weight: bold;
   padding-left: 10%;
   padding-top: 3%;
+  font-size: 22px;
+}
+
+li {
+  margin-left: 45%;
+  font-weight: bold;
 }

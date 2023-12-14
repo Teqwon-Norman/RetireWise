@@ -3,7 +3,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 
 export default function Ticker({ index, name, clickHandler }) {
-  const [size, setSize] = useState("large");
+  const [size] = useState("large");
 
   return (
     <>

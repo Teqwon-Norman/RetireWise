@@ -1,15 +1,29 @@
 import React from "react";
 import ChartComponent from "../components/ChartComponent";
 import { FloatButton, Card, ConfigProvider } from "antd";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function RetirementSimulation() {
   // On Click method for FAB
   const location = useLocation();
   const stateData = location.state ? location.state.tickers : null;
-  const onClick = () => {};
+  const navigate = useNavigate();
 
-  console.log(stateData);
+  const saveRetirementSimulation = async () => {
+    const balance = localStorage.getItem("balance");
+    const profit = localStorage.getItem("profit");
+
+    await axios.post(`http://127.0.0.1:5000/retirement/accounts/${localStorage.getItem("user-id")}`, {
+      tickers: stateData,
+      balance,
+      profit,
+    });
+
+    localStorage.removeItem("balance");
+    localStorage.removeItem("profit");
+    navigate("/retirement-accounts");
+  };
 
   return (
     <div className="w-screen h-screen py-12 px-36 bg-[#C8C8C8]">
@@ -37,7 +51,7 @@ export default function RetirementSimulation() {
           },
         }}
       >
-        <FloatButton onClick={onClick} />
+        <FloatButton onClick={saveRetirementSimulation} />
       </ConfigProvider>
     </div>
   );

@@ -7,13 +7,13 @@ import { useNavigate } from "react-router-dom";
 import "./styles/stockSelection.css";
 
 export default function StockSelection() {
-  const [size, setSize] = useState("large");
+  const [size] = useState("large");
   const [selectedTickers, setSelectedTickers] = useState([]);
   const [tickerInput, setTickerInput] = useState("");
   const navigate = useNavigate();
 
   const addTicker = async () => {
-    if (selectedTickers.length == 5) {
+    if (selectedTickers.length === 5) {
       message.error("You can only add up to 5 tickers.");
       setTickerInput("");
     } else {

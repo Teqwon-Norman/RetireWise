@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { createChart } from "lightweight-charts";
 import axios from "axios";
 
-const ChartComponent = ({ containerID, tickers }) => {
+const ChartComponent = ({ tickers }) => {
   const chartContainerRef = useRef(null);
   const chart = useRef(null);
   const [chartData, setChartData] = useState([]);
   const [accountBalance, setAccountBalance] = useState(0);
+  const [totalProfit, setTotalProfit] = useState(0);
 
   useEffect(() => {
     const getHistoricalStockData = async () => {
@@ -20,6 +21,11 @@ const ChartComponent = ({ containerID, tickers }) => {
       if (response.status === 200) {
         setChartData(response.data.chart_data);
         setAccountBalance(response.data.balance);
+        setTotalProfit(response.data.total_profit);
+
+        localStorage.setItem("balance", response.data.balance);
+        localStorage.setItem("profit", response.data.total_profit);
+        
       }
     };
 
@@ -35,13 +41,9 @@ const ChartComponent = ({ containerID, tickers }) => {
     });
 
     chartContainerRef.current.style.width = "75%";
-
     const lineSeries = chart.current.addLineSeries({ color: "#FF5733" });
-
     lineSeries.setData(chartData);
-
     chartData.sort((a, b) => b.time - a.time);
-
     chart.current.timeScale().fitContent();
 
     // Cleanup when the component unmounts
@@ -50,7 +52,7 @@ const ChartComponent = ({ containerID, tickers }) => {
         chart.current.remove();
       }
     };
-  }, [chartData]);
+  }, [chartData, tickers]);
 
   return <div className="rounded-lg" ref={chartContainerRef} />;
 };

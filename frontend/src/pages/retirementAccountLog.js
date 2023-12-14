@@ -18,12 +18,7 @@ const RetirementAccountLog = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated && posts.length === 0) {
-      setFirstName(user.given_name);
-      setLastName(user.family_name);
-      setEmail(user.email);
-      setEmailVerified(user.email_verified);
-
+    if (posts.length === 0) {
       const authenticateUser = async () => {
         const response = await axios.post("http://127.0.0.1:5000/auth/login", {
           first_name,
@@ -48,10 +43,21 @@ const RetirementAccountLog = () => {
           console.log(error);
         }
       };
-      authenticateUser();
+
       getPosts();
+      authenticateUser();
     }
-  }, [isAuthenticated, posts]);
+  }, [isAuthenticated, posts, first_name, last_name, email, email_verified]);
+
+  if (
+    isAuthenticated &&
+    (!first_name || !last_name || !email || !email_verified)
+  ) {
+    setFirstName(user.given_name);
+    setLastName(user.family_name);
+    setEmail(user.email);
+    setEmailVerified(user.email_verified);
+  }
 
   return (
     <>
@@ -73,8 +79,24 @@ const RetirementAccountLog = () => {
             </div>
           </div>
           {posts.map((post) => (
-            <AccountComponent name={post.name} />
+            <AccountComponent
+              tickers={post.tickers}
+              totalProfit={post.total_profit}
+              accountBalance={post.account_balance}
+            />
           ))}
+          <div className="posts-container">
+            <div className="circle"></div>
+            <div className="red-line"></div>
+          </div>
+          <div className="posts-container">
+            <div className="circle"></div>
+            <div className="red-line"></div>
+          </div>
+          <div className="posts-container">
+            <div className="circle"></div>
+            <div className="red-line"></div>
+          </div>
           <div className="posts-container">
             <div className="circle"></div>
             <div className="red-line"></div>
