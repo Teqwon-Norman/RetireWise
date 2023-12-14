@@ -9,7 +9,7 @@ import urllib.parse
 import json
 
 historical_data_ns = Namespace(
-    "historical_data", description="A namespace for our historical data"
+    "historical_data", description="A namespace for our historical stock data"
 )
 
 
@@ -42,11 +42,9 @@ class HistoricalData(Resource):
         m = 50000
         data_to_send = []
 
-        for index, tick in enumerate(access):
-            for i, t in enumerate(access[tick]):
-                m += (t["c"] - t["o"]) * shares_per_ticker[index]
+        for i, tick in enumerate(access):
+            for _, t in enumerate(access[tick]):
+                m += (t["c"] - t["o"]) * shares_per_ticker[i]
                 dt_object = datetime.strptime(t["t"], "%Y-%m-%dT%H:%M:%SZ")
-
                 data_to_send.append({"value": m, "time": int(dt_object.timestamp())})
-
         return make_response(jsonify({"chart_data": data_to_send, "balance": m}), 200)

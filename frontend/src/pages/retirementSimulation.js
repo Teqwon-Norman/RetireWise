@@ -1,10 +1,16 @@
 import React from "react";
 import ChartComponent from "../components/ChartComponent";
 import { FloatButton, Card, ConfigProvider } from "antd";
+import { useLocation } from "react-router-dom";
 
 export default function RetirementSimulation() {
   // On Click method for FAB
+  const location = useLocation();
+  const stateData = location.state ? location.state.tickers : null;
   const onClick = () => {};
+
+  console.log(stateData);
+
 
   return (
     <div className="w-full h-full py-12 px-36">
@@ -12,7 +18,7 @@ export default function RetirementSimulation() {
         Retirement Simulation
       </h1>
       <div className="flex space-x-4">
-        <ChartComponent containerID="firstContainer" />
+        <ChartComponent containerID="firstContainer" tickers={stateData} />
         <Card>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

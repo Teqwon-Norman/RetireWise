@@ -10,30 +10,29 @@ export default function StockSelection() {
   const [size, setSize] = useState("large");
   const [selectedTickers, setSelectedTickers] = useState([]);
   const [tickerInput, setTickerInput] = useState("");
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const addTicker = async () => {
     if (selectedTickers.length == 5) {
-        message.error("You can only add up to 5 tickers.");
-        setTickerInput("");
-
+      message.error("You can only add up to 5 tickers.");
+      setTickerInput("");
     } else {
-        try {
+      try {
         const response = await axios.get(
-            `http://127.0.0.1:5000/tickers/ticker/${tickerInput}`
+          `http://127.0.0.1:5000/tickers/ticker/${tickerInput}`
         );
 
         if (response.status === 200) {
-            setSelectedTickers([...selectedTickers, tickerInput.toUpperCase()]);
-            setTickerInput("");
+          setSelectedTickers([...selectedTickers, tickerInput.toUpperCase()]);
+          setTickerInput("");
         } else {
-            message.error("Ticker not found. Please try again.");
-            setTickerInput("");
+          message.error("Ticker not found. Please try again.");
+          setTickerInput("");
         }
-        } catch (error) {
+      } catch (error) {
         console.error("Error adding ticker:", error);
         message.error("Failed to add ticker. Please try again.");
-        }
+      }
     }
   };
 
@@ -73,13 +72,17 @@ export default function StockSelection() {
           ))}
         </div>
         <Button
-            // type="primary"
-            size={size}
-            className="simulate-retirement-button"
-            onClick={() => navigate('/retirement-simulator')}
-          >
-            Simulate Retirement
-          </Button>
+          // type="primary"
+          size={size}
+          className="simulate-retirement-button"
+          onClick={() =>
+            navigate("/retirement-simulator", {
+              state: { tickers: selectedTickers },
+            })
+          }
+        >
+          Simulate Retirement
+        </Button>
       </div>
     </>
   );
